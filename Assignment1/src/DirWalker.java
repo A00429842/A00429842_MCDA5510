@@ -11,25 +11,38 @@ import org.apache.commons.csv.CSVRecord;
 
 
 public class DirWalker {
+//        Total execution time – Total number of valid
+//        rows – Total number of skipped rows
 	public static int validNum = 0,
 			skippedNum = 0;
 	public static FileWriter writer = null;
+
+    public String getRelativePath()
+    {
+	
+	String relativePath = System.getProperty("user.dir");
+	int lastIndex = relativePath.lastIndexOf("Assignment1")+"Assignment1".length();	
+	relativePath = relativePath.substring(0, lastIndex);
+	return relativePath;	
+    }
 
     public void walk( String path ) {
 
         File root = new File( path );
         File[] list = root.listFiles();
 
-        if (list == null) return;
-//        Total execution time – Total number of valid
-//        rows – Total number of skipped rows
-        String csvFile = "/Users/shaunyan/Documents/GitHub/A00429842_MCDA5510/Assignment1/Output/result.csv";
-        File outputCsvFile = new File(csvFile);
-        
-        String[] arr = {"First Name","Last Name","Street Number","Street","City","Province","Postal Code","Country","Phone Number","email Address"};
 
 
 		try {
+			if (list == null)
+			{
+			    throw new IOException("FILE NOT FOUND");
+			}
+			String relativePath = getRelativePath();
+			String csvFile = relativePath + "/Output/result.csv";
+			System.out.println(csvFile);
+			
+			String[] arr = {"First Name","Last Name","Street Number","Street","City","Province","Postal Code","Country","Phone Number","email Address"};
 			if(writer == null)
 			{
 			
@@ -51,8 +64,6 @@ public class DirWalker {
 	        for ( File f : list ) {
 	            if ( f.isDirectory() ) {
 	                walk( f.getAbsolutePath() );
-	                
-	                //System.out.println( "Dir:" + f.getAbsoluteFile() );
 	
 	            }
 	            else if(f.getName().indexOf(".csv") > -1){
@@ -61,14 +72,13 @@ public class DirWalker {
 	                //System.out.println(str.substring(index));
 	                
 	                Reader in;
-	        		try {
-	        			//System.out.println(f.getAbsoluteFile());
-	        			in = new FileReader(f.getAbsoluteFile());
-	        			Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
-	        			
-	        			for (CSVRecord record : records) {
-	        				break;
-	        			}		
+				//System.out.println(f.getAbsoluteFile());
+				in = new FileReader(f.getAbsoluteFile());
+				Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
+				
+				for (CSVRecord record : records) {
+					break;
+				}		
 	        			
 	        			
 	        	        for (CSVRecord record : records) {
@@ -109,9 +119,6 @@ public class DirWalker {
 	        				
 	        			    //System.out.println("Data: "+ id+" : "+refID);
 	        			}		
-	        		} catch ( IOException e) {
-	        			e.printStackTrace();
-	        		}
 	            }
 	           
 	        }
@@ -121,21 +128,30 @@ public class DirWalker {
 	   
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			Logger.getLogger("Main01").log(Level.SEVERE, e.getMessage());
+
 			e.printStackTrace();
 		}
         
     }
 
     public static void main(String[] args) {
-		final long startTime = System.currentTimeMillis();
-		System.setProperty("java.util.logging.config.file",
-	              "./logging.properties");
+	final long startTime = System.currentTimeMillis();
     	DirWalker fw = new DirWalker();
-        fw.walk("/Users/shaunyan/Documents/GitHub/A00429842_MCDA5510/Assignment1/Sample Data" );
+	String relativePath = fw.getRelativePath();
+	String logPath = relativePath + "/logging.properties";
+	System.setProperty("java.util.logging.config.file",
+	        			logPath);
+	System.out.println(relativePath + "/Sample Data");
+        fw.walk(relativePath + "/Sample Data" );
 		try {
 			fw.writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			Logger.getLogger("Main01").log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			Logger.getLogger("Main01").log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -146,6 +162,7 @@ public class DirWalker {
     }
 
 }
+
 
 
 
