@@ -40,7 +40,6 @@ public class DirWalker {
 			}
 			String relativePath = getRelativePath();
 			String csvFile = relativePath + "/Output/result.csv";
-			System.out.println(csvFile);
 			
 			String[] arr = {"First Name","Last Name","Street Number","Street","City","Province","Postal Code","Country","Phone Number","email Address"};
 			if(writer == null)
