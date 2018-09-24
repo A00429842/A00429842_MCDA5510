@@ -16,14 +16,18 @@ public class DirWalker {
 	public static int validNum = 0,
 			skippedNum = 0;
 	public static FileWriter writer = null;
+	public String relativePath = "";
 
     public String getRelativePath()
     {
-	
-	String relativePath = System.getProperty("user.dir");
-	int lastIndex = relativePath.lastIndexOf("Assignment1")+"Assignment1".length();	
-	relativePath = relativePath.substring(0, lastIndex);
-	return relativePath;	
+	if(this.relativePath == "")
+    	{
+		this.relativePath = System.getProperty("user.dir");
+		int lastIndex = this.relativePath.lastIndexOf("Assignment1")+"Assignment1".length();	
+		this.relativePath = this.relativePath.substring(0, lastIndex);
+    	}
+		
+	return this.relativePath;	
     }
 
     public void walk( String path ) {
@@ -141,7 +145,6 @@ public class DirWalker {
 	String logPath = relativePath + "/logging.properties";
 	System.setProperty("java.util.logging.config.file",
 	        			logPath);
-	System.out.println(relativePath + "/Sample Data");
         fw.walk(relativePath + "/Sample Data" );
 		try {
 			fw.writer.close();
