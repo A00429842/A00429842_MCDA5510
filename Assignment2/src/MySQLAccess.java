@@ -51,7 +51,7 @@ public class MySQLAccess {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			// Setup the connection with the DB
 
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/z_yan?" // DTP
+			connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/z_yan?" // DTP
 					// I
 					// spelled
 					// z_yan
@@ -143,8 +143,8 @@ public class MySQLAccess {
 		String insertTableSQL = "insert into transaction"
 				+ "(`transaction`.`ID`, `transaction`.`NameOnCard`, `transaction`.`CardNumber`, `transaction`.`UnitPrice`, `transaction`.`Quantity`,"
 				+ " `transaction`.`TotalPrice`, `transaction`.`ExpDate`, `transaction`.`CreatedOn`, `transaction`.`CreatedBy`, "
-				+ "`transaction`.`CreditCardType`, `transaction`.`Prefix`, `transaction`.`CreditCardNumber`, `transaction`.`CreditCardExpire`) VALUES "
-				+ "(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "`transaction`.`CreditCardType`, `transaction`.`Prefix`, `transaction`.`CreditCardNumber`, `transaction`.`CreditCardExpire`,`CreditCardTypeName`) VALUES "
+				+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection.prepareStatement(insertTableSQL);
@@ -161,6 +161,7 @@ public class MySQLAccess {
 			preparedStatement.setInt(11, trxn.getPrefix());
 			preparedStatement.setString(12, trxn.getCreditCardNumber());
 			preparedStatement.setString(13, trxn.getCreditCardExpire());
+			preparedStatement.setString(14, trxn.getCreditCardTypeName());
 			// execute insert SQL stetement
 			preparedStatement .executeUpdate();
 			result = true;
@@ -189,8 +190,8 @@ public class MySQLAccess {
 		String insertTableSQL = "replace into transaction"
 				+ "(`transaction`.`ID`, `transaction`.`NameOnCard`, `transaction`.`CardNumber`, `transaction`.`UnitPrice`, `transaction`.`Quantity`,"
 				+ " `transaction`.`TotalPrice`, `transaction`.`ExpDate`, `transaction`.`CreatedOn`, `transaction`.`CreatedBy`, "
-				+ "`transaction`.`CreditCardType`, `transaction`.`Prefix`, `transaction`.`CreditCardNumber`, `transaction`.`CreditCardExpire`) VALUES "
-				+ "(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "`transaction`.`CreditCardType`, `transaction`.`Prefix`, `transaction`.`CreditCardNumber`, `transaction`.`CreditCardExpire`,`CreditCardTypeName`) VALUES "
+				+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection.prepareStatement(insertTableSQL);
@@ -207,6 +208,7 @@ public class MySQLAccess {
 			preparedStatement.setInt(11, trxn.getPrefix());
 			preparedStatement.setString(12, trxn.getCreditCardNumber());
 			preparedStatement.setString(13, trxn.getCreditCardExpire());
+			preparedStatement.setString(14, trxn.getCreditCardTypeName());
 			// execute insert SQL stetement
 			preparedStatement .executeUpdate();
 			result = true;
@@ -268,6 +270,7 @@ public class MySQLAccess {
 				trxn.setCreatedOn(resultSet.getString("CreatedOn"));
 				trxn.setCreatedBy(resultSet.getString("CreatedBy"));
 				trxn.setCreditCardType(resultSet.getInt("CreditCardType"));
+				trxn.setCreditCardTypeName(resultSet.getString("CreditCardTypeName"));
 				trxn.setPrefix(resultSet.getInt("Prefix"));
 				trxn.setCreditCardNumber(resultSet.getString("CreditCardNumber"));
 				trxn.setCreditCardExpire(resultSet.getString("CreditCardExpire"));

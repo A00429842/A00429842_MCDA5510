@@ -32,6 +32,8 @@ public class Transaction {
 	
 	private String creditCardExpire;
 	
+	private String CreditCardTypeName;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -122,6 +124,17 @@ public class Transaction {
 	}
 	public void setCreditCardType(Integer creditCardType) {
 		this.creditCardType = creditCardType;
+	}
+	public String getCreditCardTypeName() {
+	    Hashtable<Integer, String> cardTypes
+	     = new Hashtable<Integer, String>();
+	    cardTypes.put(1, "MasterCard");
+	    cardTypes.put(2, "Visa");
+	    cardTypes.put(3, "American Express");
+		return cardTypes.get(creditCardType);
+	}
+	public void setCreditCardTypeName(String creditCardTypeName) {
+		CreditCardTypeName = creditCardTypeName;
 	}
 	
 	
