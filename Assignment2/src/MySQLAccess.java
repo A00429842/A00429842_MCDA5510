@@ -57,7 +57,7 @@ public class MySQLAccess {
 					// z_yan
 					// wrong
 					// oops
-					+ "user=root&password=A00429842" // Creds
+					+ "user=z_yan&password=A00429842" // Creds
 					+ "&useSSL=false" // b/c localhost
 					+ "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"); // timezone
 
