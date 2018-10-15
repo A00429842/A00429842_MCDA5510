@@ -5,6 +5,8 @@
  * 
  **/
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
 
@@ -110,7 +114,12 @@ public class MySQLAccess {
 			// e.g. resultSet.getSTring(2);
 			Transaction trxn = new Transaction();
 			trxn.setNameOnCard(resultSet.getString("NameOnCard"));
-			trxn.setCardNumber(resultSet.getString("CardNumber"));
+			try {
+				trxn.setCardNumber(resultSet.getString("CardNumber"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			results.add(trxn);
 
 			// TODO
@@ -130,7 +139,53 @@ public class MySQLAccess {
 
 	}
 	
-	public boolean createTransaction( Transaction trxn)
+	public void validation(Transaction trxn) throws IllegalArgumentException, IllegalAccessException, Exception
+	{
+		Field[] declaredFields = trxn.getClass().getDeclaredFields();
+        for(Field field : declaredFields) {
+            //System.out.println(field.getName());
+            Annotation annotation = field.getAnnotation(Required.class);
+            
+            if (annotation != null) {
+
+                Required required = (Required) annotation;
+
+                /**
+                 *  Check if it says this field is required
+                 */
+                if (required.value()) {
+                    /**
+                     *  Now we make sure we can access the private
+                     *  fields also, so we need to call this method also
+                     *  other wise we would get a {@link java.lang.IllegalAccessException}
+                     */
+                    field.setAccessible(true);
+                    /**
+                     *  If this field is required, then it should be present
+                     *  in the declared fields array, if it is throw the
+                     *  {@link RequiredFieldException}
+                     */
+
+                    if (field.get(trxn) == null) {
+            			Logger.getLogger("Main").log(Level.SEVERE,field.getName()+" is NULL");
+                    	throw new Exception(field.getName()+" is NULL");
+                    }else {
+                    	try {
+                    		String regEx="[; : ! @ # $ % ^ * + ? < >]";  
+                            Pattern   p   =   Pattern.compile(regEx);     
+                            Matcher   m   =   p.matcher(String.valueOf(field.get(trxn)));   
+                            field.set(trxn, m.replaceAll("").trim());
+                    	}catch(IllegalArgumentException e) {
+                    		
+                    	}
+                    	 
+                    }
+                }
+            }
+        }
+	}
+	
+	public boolean createTransaction( Transaction trxn) throws IllegalArgumentException, IllegalAccessException, Exception 
 	{
 		boolean result = false;
 		if(getTransaction(trxn.getId()) != null)
@@ -139,12 +194,13 @@ public class MySQLAccess {
 			Logger.getLogger("Main").log(Level.SEVERE, "try to insert the same id:"+trxn.getId());
 			return result;
 		}
+		validation(trxn);
 		
 		String insertTableSQL = "insert into transaction"
 				+ "(`transaction`.`ID`, `transaction`.`NameOnCard`, `transaction`.`CardNumber`, `transaction`.`UnitPrice`, `transaction`.`Quantity`,"
 				+ " `transaction`.`TotalPrice`, `transaction`.`ExpDate`, `transaction`.`CreatedOn`, `transaction`.`CreatedBy`, "
-				+ "`transaction`.`CreditCardType`, `transaction`.`Prefix`, `transaction`.`CreditCardNumber`, `transaction`.`CreditCardExpire`,`CreditCardTypeName`) VALUES "
-				+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "`transaction`.`CreditCardType`, `CreditCardTypeName`) VALUES "
+				+ "(?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection.prepareStatement(insertTableSQL);
@@ -158,12 +214,9 @@ public class MySQLAccess {
 			preparedStatement.setString(8, trxn.getCreatedOn());
 			preparedStatement.setString(9, trxn.getCreatedBy());
 			preparedStatement.setInt(10, trxn.getCreditCardType());
-			preparedStatement.setInt(11, trxn.getPrefix());
-			preparedStatement.setString(12, trxn.getCreditCardNumber());
-			preparedStatement.setString(13, trxn.getCreditCardExpire());
-			preparedStatement.setString(14, trxn.getCreditCardTypeName());
+			preparedStatement.setString(11, trxn.getCreditCardTypeName());
 			// execute insert SQL stetement
-			preparedStatement .executeUpdate();
+			preparedStatement.executeUpdate();
 			result = true;
 			Gson gson = new Gson();
 			String info = gson.toJson(trxn);
@@ -172,12 +225,14 @@ public class MySQLAccess {
 			// TODO Auto-generated catch block
 			Logger.getLogger("Main").log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
+		} catch(NullPointerException e) {
+			Logger.getLogger("Main").log(Level.SEVERE, e.getMessage());
 		}
 		
 		return result;
 	}
 	
-	public boolean updateTransaction(Transaction trxn)
+	public boolean updateTransaction(Transaction trxn) throws IllegalArgumentException, IllegalAccessException, Exception
 	{
 		boolean result = false;
 		if(getTransaction(trxn.getId()) != null)
@@ -186,12 +241,12 @@ public class MySQLAccess {
 			Logger.getLogger("Main").log(Level.SEVERE, "try to update with id:"+trxn.getId());
 			return result;
 		}
-		
+		validation(trxn);
 		String insertTableSQL = "replace into transaction"
 				+ "(`transaction`.`ID`, `transaction`.`NameOnCard`, `transaction`.`CardNumber`, `transaction`.`UnitPrice`, `transaction`.`Quantity`,"
 				+ " `transaction`.`TotalPrice`, `transaction`.`ExpDate`, `transaction`.`CreatedOn`, `transaction`.`CreatedBy`, "
-				+ "`transaction`.`CreditCardType`, `transaction`.`Prefix`, `transaction`.`CreditCardNumber`, `transaction`.`CreditCardExpire`,`CreditCardTypeName`) VALUES "
-				+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "`transaction`.`CreditCardType`,`CreditCardTypeName`) VALUES "
+				+ "(?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection.prepareStatement(insertTableSQL);
@@ -205,10 +260,7 @@ public class MySQLAccess {
 			preparedStatement.setString(8, trxn.getCreatedOn());
 			preparedStatement.setString(9, trxn.getCreatedBy());
 			preparedStatement.setInt(10, trxn.getCreditCardType());
-			preparedStatement.setInt(11, trxn.getPrefix());
-			preparedStatement.setString(12, trxn.getCreditCardNumber());
-			preparedStatement.setString(13, trxn.getCreditCardExpire());
-			preparedStatement.setString(14, trxn.getCreditCardTypeName());
+			preparedStatement.setString(11, trxn.getCreditCardTypeName());
 			// execute insert SQL stetement
 			preparedStatement .executeUpdate();
 			result = true;
@@ -219,6 +271,8 @@ public class MySQLAccess {
 			// TODO Auto-generated catch block
 			Logger.getLogger("Main").log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
+		} catch (NullPointerException e) {
+			Logger.getLogger("Main").log(Level.SEVERE, e.getMessage());
 		}
 		
 		return result;
@@ -262,6 +316,8 @@ public class MySQLAccess {
 				trxn = new Transaction();
 				trxn.setId(resultSet.getInt("ID"));
 				trxn.setNameOnCard(resultSet.getString("NameOnCard"));
+				trxn.setCreditCardType(resultSet.getInt("CreditCardType"));
+				trxn.setCreditCardTypeName(resultSet.getString("CreditCardTypeName"));
 				trxn.setCardNumber(resultSet.getString("CardNumber"));		
 				trxn.setUnitPrice(resultSet.getDouble("UnitPrice"));
 				trxn.setQuantity(resultSet.getInt("Quantity"));
@@ -269,11 +325,10 @@ public class MySQLAccess {
 				trxn.setExpDate(resultSet.getString("ExpDate"));
 				trxn.setCreatedOn(resultSet.getString("CreatedOn"));
 				trxn.setCreatedBy(resultSet.getString("CreatedBy"));
-				trxn.setCreditCardType(resultSet.getInt("CreditCardType"));
-				trxn.setCreditCardTypeName(resultSet.getString("CreditCardTypeName"));
-				trxn.setPrefix(resultSet.getInt("Prefix"));
-				trxn.setCreditCardNumber(resultSet.getString("CreditCardNumber"));
-				trxn.setCreditCardExpire(resultSet.getString("CreditCardExpire"));
+//				trxn.setPrefix(resultSet.getInt("Prefix"));
+//				trxn.setCreditCardNumber(resultSet.getString("CreditCardNumber"));
+//				trxn.setCreditCardExpire(resultSet.getString("CreditCardExpire"));
+				
 			}
 			if (resultSet != null) {
 				resultSet.close();
@@ -286,6 +341,10 @@ public class MySQLAccess {
 			String results = gson.toJson(trxn);
 			Logger.getLogger("Main").log(Level.INFO, "get:" + results);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Logger.getLogger("Main").log(Level.SEVERE, e.getMessage());
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Logger.getLogger("Main").log(Level.SEVERE, e.getMessage());

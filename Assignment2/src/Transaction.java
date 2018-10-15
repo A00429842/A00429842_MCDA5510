@@ -1,29 +1,42 @@
 import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 import com.google.gson.Gson;
 
-import java.time.LocalDateTime;    
-public class Transaction {
-	
-	private Integer id;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.time.LocalDateTime;   
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+@interface Required {
 
+	boolean value() default true;
+
+}
+
+
+public class Transaction {
+	@Required
+	private Integer id;
+	@Required
 	private String nameOnCard;
-	
+	@Required
 	private String cardNumber;
-	
+	@Required
 	private Double unitPrice;
-	
+	@Required
 	private Integer quantity;
-	
 	private Double totalPrice;
-	
+	@Required
 	private String expDate;
-	
 	private String createdOn;
-	
 	private String createdBy;
-	
+	@Required
 	private Integer creditCardType;
 	
 	private Integer prefix;
@@ -31,7 +44,6 @@ public class Transaction {
 	private String creditCardNumber;
 	
 	private String creditCardExpire;
-	
 	private String CreditCardTypeName;
 	
 	public Integer getId() {
@@ -53,6 +65,7 @@ public class Transaction {
 		this.quantity = quantity;
 	}
 	public Double getTotalPrice() {
+		totalPrice = quantity * unitPrice;
 		return totalPrice;
 	}
 	public void setTotalPrice(Double totalPrice) {
@@ -61,7 +74,13 @@ public class Transaction {
 	public String getExpDate() {
 		return expDate;
 	}
-	public void setExpDate(String expDate) {
+	public void setExpDate(String expDate) throws Exception {
+		boolean isCorrect = expDate.matches("(0[1-9]|1[0-2])/20(1[6-9]|2[0-9]|31)");
+    	if(!isCorrect)
+    	{
+			Logger.getLogger("Main").log(Level.SEVERE, "exp date is not correct");
+    		throw new Exception("exp date is not correct");
+    	}
 		this.expDate = expDate;
 	}
 	public String getCreatedOn() {
@@ -80,28 +99,47 @@ public class Transaction {
 	public void setCreatedBy(String createBy) {
 		this.createdBy = createBy;
 	}
-	public Integer getPrefix() {
-		return prefix;
-	}
-	public void setPrefix(Integer prefix) {
-		this.prefix = prefix;
-	}
-	public String getCreditCardNumber() {
-		return creditCardNumber;
-	}
-	public void setCreditCardNumber(String creditCardNumber) {
-		this.creditCardNumber = creditCardNumber;
-	}
-	public String getCreditCardExpire() {
-		return creditCardExpire;
-	}
-	public void setCreditCardExpire(String creditCardExpire) {
-		this.creditCardExpire = creditCardExpire;
-	}
+//	public Integer getPrefix() {
+//		return prefix;
+//	}
+//	public void setPrefix(Integer prefix) {
+//		this.prefix = prefix;
+//	}
+//	public String getCreditCardNumber() {
+//		return creditCardNumber;
+//	}
+//	public void setCreditCardNumber(String creditCardNumber) {
+//		this.creditCardNumber = creditCardNumber;
+//	}
+//	public String getCreditCardExpire() {
+//		return creditCardExpire;
+//	}
+//	public void setCreditCardExpire(String creditCardExpire) {
+//		this.creditCardExpire = creditCardExpire;
+//	}
 	public String getCardNumber() {
 		return cardNumber;
 	}
-	public void setCardNumber(String cardNumber) {
+	public void setCardNumber(String cardNumber) throws Exception {
+	    String regStr = "";
+		if(creditCardType == 1)
+		{
+	    	regStr = "5[1-5][0-9]{14}";
+		}else if(creditCardType == 2)
+		{
+	    	regStr = "4[0-9]{15}";
+
+		}else if(creditCardType == 3)
+		{
+	    	regStr = "3(4|7)[0-9] {14}";
+		}
+		boolean isCorrect = cardNumber.matches(regStr);
+		if(!isCorrect)
+		{
+			Logger.getLogger("Main").log(Level.SEVERE, "card number is not correct");
+    		throw new Exception("card number is not correct");
+		}
+
 		this.cardNumber = cardNumber;
 	}
 	
