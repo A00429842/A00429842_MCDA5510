@@ -20,14 +20,14 @@ public class DirWalker {
 
     public String getRelativePath()
     {
-	if(this.relativePath == "")
-    	{
-		this.relativePath = System.getProperty("user.dir");
-		int lastIndex = this.relativePath.lastIndexOf("Assignment1")+"Assignment1".length();	
-		this.relativePath = this.relativePath.substring(0, lastIndex);
-    	}
-		
-	return this.relativePath;	
+		if(this.relativePath == "")
+	    {
+			this.relativePath = System.getProperty("user.dir");
+			int lastIndex = this.relativePath.lastIndexOf("Assignment1")+"Assignment1".length();	
+			this.relativePath = this.relativePath.substring(0, lastIndex);
+	    }
+			
+		return this.relativePath;	
     }
 
     public void walk( String path ) {
