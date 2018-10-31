@@ -1,21 +1,1 @@
-First Name,Last Name,Street Number,Street,City,Province,Country,Post Code
-DAVID,LastNameE,Haf,7,Bankok,Ubc,Canada,22B3
-DAVID,LastNameF,Inlist,6,Bankok,Nova scocita,Canada,32032
-CHARLES,LastNameE,Haf,3,Tianjing,Nova scocita,Canada,22525
-DAVID,LastNameF,Inlist,8,St. John,Nova scocita,Canada,22222
-RICHARD,LastNameE,Tawer,2,Bankok,Otoni,Canada,888
-WILLIAM,LastNameF,Tawer,9,Rockcity,Voucuber,Canada,22B3
-JOSEPH,LastNameB,Haf,8,Tianjing,Syny,Canada,22222
-DAVID,LastNameF,Pelong,5,Beijing,Smu,Canada,22B3
-JOHN,LastNameB,Dave,8,Bankok,Syny,Canada,B333
-JOSEPH,LastNameC,Balth,6,Beijing,Voucuber,Canada,22525
-MICHAEL,LastNameB,Pelong,2,Hottap,Nova scocita,Canada,B333
-DAVID,LastNameC,Balth,7,Bankok,Nova scocita,Canada,32032
-JOSEPH,LastNameD,Inlist,3,Tianjing,Nova scocita,Canada,22222
-WILLIAM,LastNameB,Haf,7,Tianjing,Nova scocita,Canada,32032
-RICHARD,LastNameF,Pelong,4,St. John,Voucuber,Canada,22222
-CHARLES,LastNameC,Tawer,8,Hottap,Ubc,Canada,22525
-ROBERT,LastNameF,Tower,9,St. John,Otoni,Canada,77777
-WILLIAM,LastNameB,Pelong,5,Firecity,Syny,Canada,32032
-MICHAEL,LastNameE,Tower,6,Firecity,Voucuber,Canada,22B3
-CHARLES,LastNameB,Dave,5,Watercity,Otoni,Canada,125235
+First Name,Last Name,Street Number,Street,City,Province,Country,Post CodeRICHARD,LastNameF,7,Tawer,St. John,Voucuber,Canada,77777ROBERT,LastNameB,5,Tower,Rockcity,Guangdong,Canada,22525JOSEPH,LastNameB,9,Tower,Firecity,Smu,Canada,32032JOSEPH,LastNameF,7,Pelong,Rockcity,Syny,Canada,22B3JOSEPH,LastNameF,7,Tower,Beijing,Nova scocita,Canada,32032CHARLES,LastNameD,4,Tower,Bankok,Voucuber,Canada,32032JOSEPH,LastNameB,7,Haf,Firecity,Syny,Canada,B333JOSEPH,LastNameB,6,Dave,Hottap,Voucuber,Canada,125235MICHAEL,LastNameB,2,Haf,Beijing,Otoni,Canada,888CHARLES,LastNameD,3,Tower,Firecity,Xyz,Canada,22222DAVID,LastNameE,2,Pelong,Bankok,Voucuber,Canada,32032ROBERT,LastNameB,8,London,Tianjing,Syny,Canada,B333MICHAEL,LastNameE,6,Dave,St. John,Nova scocita,Canada,22222JOSEPH,LastNameF,5,Inlist,Firecity,Syny,Canada,77777JOSEPH,LastNameE,8,Inlist,Beijing,Nova scocita,Canada,32032MICHAEL,LastNameF,7,Pelong,St. John,Ubc,Canada,77777RICHARD,LastNameB,9,London,St. John,Voucuber,Canada,77777CHARLES,LastNameF,8,Tawer,Hottap,Syny,Canada,B333CHARLES,LastNameF,7,Tawer,Bankok,Guangdong,Canada,77777JOSEPH,LastNameE,7,Tower,Beijing,Xyz,Canada,888

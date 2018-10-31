@@ -102,7 +102,7 @@ namespace MSCDA5510
                    province = "province",
                    country = "Canada",
                     postCode = "postCode";
-            return ReturnRandomLine(street) + "," + ReturnRandomLine(streetNumber) + "," + ReturnRandomLine(city) + "," + ReturnRandomLine(province)
+            return ReturnRandomLine(streetNumber) + "," + ReturnRandomLine(street) + "," + ReturnRandomLine(city) + "," + ReturnRandomLine(province)
                 +","+country+","+ReturnRandomLine(postCode);
         }
 
