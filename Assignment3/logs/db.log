@@ -1,0 +1,4 @@
+Nov 16, 2018 11:52:44 AM com.mcda5510.dao.MySQLAccess getTransaction
+INFO: get:null
+Nov 16, 2018 11:52:44 AM com.mcda5510.dao.MySQLAccess createTransaction
+INFO: saves a row in the database successfully: {"id":1,"nameOnCard":"YANZEWEI2","cardNumber":"5155555533252353","unitPrice":3.2,"quantity":50,"totalPrice":160.0,"expDate":"03/2031","createdOn":"2018-11-16 11:52:44","createdBy":"shaunyan","creditCardType":1}
