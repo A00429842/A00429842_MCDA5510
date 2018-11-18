@@ -1,4 +1,25 @@
-Nov 16, 2018 11:52:44 AM com.mcda5510.dao.MySQLAccess getTransaction
+Nov 18, 2018 10:22:07 AM com.mcda5510.dao.MySQLAccess getTransaction
+INFO: get:{"id":1,"nameOnCard":"YANZEWEI2","cardNumber":"5155555533252353","unitPrice":3.0,"quantity":50,"totalPrice":160.0,"expDate":"03/2031","createdOn":"2018-11-16 11:52:44","createdBy":"shaunyan","creditCardType":1,"CreditCardTypeName":"MasterCard"}
+ID exists in DB and you should invoke updateTransaction
+Nov 18, 2018 10:22:07 AM com.mcda5510.dao.MySQLAccess createTransaction
+SEVERE: try to insert the same id:1
+Nov 18, 2018 10:22:07 AM com.mcda5510.dao.MySQLAccess getTransaction
+INFO: get:{"id":1,"nameOnCard":"YANZEWEI2","cardNumber":"5155555533252353","unitPrice":3.0,"quantity":50,"totalPrice":160.0,"expDate":"03/2031","createdOn":"2018-11-16 11:52:44","createdBy":"shaunyan","creditCardType":1,"CreditCardTypeName":"MasterCard"}
+Nov 18, 2018 10:22:07 AM com.mcda5510.dao.MySQLAccess getTransaction
+INFO: get:{"id":1,"nameOnCard":"YANZEWEI2","cardNumber":"5155555533252353","unitPrice":3.0,"quantity":50,"totalPrice":160.0,"expDate":"03/2031","createdOn":"2018-11-16 11:52:44","createdBy":"shaunyan","creditCardType":1,"CreditCardTypeName":"MasterCard"}
+Nov 18, 2018 10:22:07 AM com.mcda5510.dao.MySQLAccess getTransaction
+INFO: get:{"id":1,"nameOnCard":"YANZEWEI2","cardNumber":"5155555533252353","unitPrice":3.0,"quantity":50,"totalPrice":160.0,"expDate":"03/2031","createdOn":"2018-11-16 11:52:44","createdBy":"shaunyan","creditCardType":1,"CreditCardTypeName":"MasterCard"}
+Nov 18, 2018 10:22:07 AM com.mcda5510.dao.MySQLAccess updateTransaction
+SEVERE: try to update with id:1
+ID do not exist in DB and you should invoke createTransaction
+Nov 18, 2018 10:22:07 AM com.mcda5510.dao.MySQLAccess getTransaction
+INFO: get:{"id":1,"nameOnCard":"YANZEWEI2","cardNumber":"5155555533252353","unitPrice":3.0,"quantity":50,"totalPrice":160.0,"expDate":"03/2031","createdOn":"2018-11-16 11:52:44","createdBy":"shaunyan","creditCardType":1,"CreditCardTypeName":"MasterCard"}
+ID exists in DB and you should invoke updateTransaction
+Nov 18, 2018 10:22:07 AM com.mcda5510.dao.MySQLAccess createTransaction
+SEVERE: try to insert the same id:1
+Nov 18, 2018 10:22:07 AM com.mcda5510.dao.MySQLAccess removeTransaction
+INFO: delete successfully with id:1
+Nov 18, 2018 10:22:07 AM com.mcda5510.dao.MySQLAccess getTransaction
 INFO: get:null
-Nov 16, 2018 11:52:44 AM com.mcda5510.dao.MySQLAccess createTransaction
-INFO: saves a row in the database successfully: {"id":1,"nameOnCard":"YANZEWEI2","cardNumber":"5155555533252353","unitPrice":3.2,"quantity":50,"totalPrice":160.0,"expDate":"03/2031","createdOn":"2018-11-16 11:52:44","createdBy":"shaunyan","creditCardType":1}
+Nov 18, 2018 10:22:07 AM com.mcda5510.dao.MySQLAccess createTransaction
+INFO: saves a row in the database successfully: {"id":1,"nameOnCard":"YANZEWEI2","cardNumber":"5155555533252353","unitPrice":34.5,"quantity":50,"totalPrice":1725.0,"expDate":"03/2031","createdOn":"2018-11-18 10:22:07","createdBy":"shaunyan","creditCardType":1}
