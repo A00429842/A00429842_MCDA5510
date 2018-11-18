@@ -1,5 +1,10 @@
 package com.mcda5510.service;
 
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
 import com.mcda5510.connection.ConnectionSingleton;
 import com.mcda5510.dao.*;
 import com.mcda5510.entity.Transaction;
@@ -42,8 +47,26 @@ public class TrxnWebService {
 		dao.closeConnection();
 	}
 	
-	public void test()
+	public void test() throws IOException
 	{
+		Logger logger = Logger.getLogger("MyLog");  
+	    FileHandler fh;  
+
+	    try {  
+
+	        // This block configure the logger with handler and formatter  
+	        fh = new FileHandler("/home/student_2018_fall/z_yan/A00429842_MCDA5510/Assignment3/test.log");  
+	        logger.addHandler(fh);
+	        SimpleFormatter formatter = new SimpleFormatter();  
+	        fh.setFormatter(formatter);  
+
+	        // the following statement is used to log any messages  
+	        logger.info("My first log");  
+
+	    } catch (SecurityException e) {  
+	        e.printStackTrace();  
+	    } 
+	    logger.info("Hi How r u?");  
 		System.out.println("test1");
 	}
 	

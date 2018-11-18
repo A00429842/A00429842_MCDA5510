@@ -1,5 +1,7 @@
 package com.mcda5510.dao;
 
+import java.io.IOException;
+
 /**
  * Original source code from 
  * http://www.vogella.com/tutorials/MySQLJava/article.html
@@ -16,8 +18,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.google.gson.Gson;
@@ -26,6 +30,7 @@ import com.mcda5510.entity.*;
 
 public class MySQLAccess {
 	private static Connection connection;
+	private static Logger logger;
 	public MySQLAccess() {
 		try {
 			connection = ConnectionSingleton.getConnection();
@@ -36,13 +41,24 @@ public class MySQLAccess {
 		}
 	}
 	
-	public void setupLogpath() {
-		String relativePath = System.getProperty("user.dir");
-		int lastIndex = relativePath.lastIndexOf("Assignment3")+"Assignment3".length();	
-		relativePath = relativePath.substring(0, lastIndex);
-		String logPath = relativePath + "/logging.properties";
-		System.setProperty("java.util.logging.config.file",
-		        			logPath);
+	public void setupLogpath() throws SecurityException, IOException {
+		logger = Logger.getLogger("Main");  
+	    FileHandler fh;  
+	    // This block configure the logger with handler and formatter  
+	    fh = new FileHandler("/home/student_2018_fall/z_yan/A00429842_MCDA5510/Assignment3/logs/db2.log");  
+        logger.addHandler(fh);
+        SimpleFormatter formatter = new SimpleFormatter();  
+        fh.setFormatter(formatter);  
+
+        // the following statement is used to log any messages  
+        //logger.info("My first log");  
+
+//		String relativePath = System.getProperty("user.dir");
+//		int lastIndex = relativePath.lastIndexOf("Assignment3")+"Assignment3".length();	
+//		relativePath = relativePath.substring(0, lastIndex);
+//		String logPath = relativePath + "/logging.properties";
+//		System.setProperty("java.util.logging.config.file",
+//		        			logPath);
 	}
 
 	
@@ -75,7 +91,7 @@ public class MySQLAccess {
                      */
 
                     if (field.get(trxn) == null) {
-            			Logger.getLogger("Main").log(Level.SEVERE,field.getName()+" is NULL");
+            			logger.log(Level.SEVERE,field.getName()+" is NULL");
                     	throw new Exception(field.getName()+" is NULL");
                     }else {
                     	try {
@@ -99,7 +115,7 @@ public class MySQLAccess {
 		if(getTransaction(trxn.getId()) != null)
 		{
 			System.out.println("ID exists in DB and you should invoke updateTransaction");
-			Logger.getLogger("Main").log(Level.SEVERE, "try to insert the same id:"+trxn.getId());
+			logger.log(Level.SEVERE, "try to insert the same id:"+trxn.getId());
 			return result;
 		}
 		validation(trxn);
@@ -128,13 +144,13 @@ public class MySQLAccess {
 			result = true;
 			Gson gson = new Gson();
 			String info = gson.toJson(trxn);
-			Logger.getLogger("Main").log(Level.INFO, "saves a row in the database successfully: " + info);
+			logger.log(Level.INFO, "saves a row in the database successfully: " + info);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			Logger.getLogger("Main").log(Level.SEVERE, e.getMessage());
+			logger.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
 		} catch(NullPointerException e) {
-			Logger.getLogger("Main").log(Level.SEVERE, e.getMessage());
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 		
 		return result;
@@ -146,7 +162,7 @@ public class MySQLAccess {
 		if(getTransaction(trxn.getId()) != null)
 		{
 			System.out.println("ID do not exist in DB and you should invoke createTransaction");
-			Logger.getLogger("Main").log(Level.SEVERE, "try to update with id:"+trxn.getId());
+			logger.log(Level.SEVERE, "try to update with id:"+trxn.getId());
 			return result;
 		}
 		validation(trxn);
@@ -174,13 +190,13 @@ public class MySQLAccess {
 			result = true;
 			Gson gson = new Gson();
 			String info = gson.toJson(trxn);
-			Logger.getLogger("Main").log(Level.INFO, "update a row in the database successfully: " + info);
+			logger.log(Level.INFO, "update a row in the database successfully: " + info);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			Logger.getLogger("Main").log(Level.SEVERE, e.getMessage());
+			logger.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
 		} catch (NullPointerException e) {
-			Logger.getLogger("Main").log(Level.SEVERE, e.getMessage());
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 		
 		return result;
@@ -200,11 +216,11 @@ public class MySQLAccess {
 				statement.close();
 			}
 
-			Logger.getLogger("Main").log(Level.INFO, "delete successfully with id:" + trxnID);
+			logger.log(Level.INFO, "delete successfully with id:" + trxnID);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Logger.getLogger("Main").log(Level.SEVERE, e.getMessage());
+			logger.log(Level.SEVERE, e.getMessage());
 		} finally {
 			statement = null;
 		}
@@ -247,15 +263,15 @@ public class MySQLAccess {
 			}
 			Gson gson = new Gson();
 			String results = gson.toJson(trxn);
-			Logger.getLogger("Main").log(Level.INFO, "get:" + results);
+			logger.log(Level.INFO, "get:" + results);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Logger.getLogger("Main").log(Level.SEVERE, e.getMessage());
+			logger.log(Level.SEVERE, e.getMessage());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Logger.getLogger("Main").log(Level.SEVERE, e.getMessage());
+			logger.log(Level.SEVERE, e.getMessage());
 		} finally {
 			statement = null;
 			resultSet = null;
