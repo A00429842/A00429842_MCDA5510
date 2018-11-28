@@ -1,0 +1,2 @@
+C:\Users\deyukong\Documents\A00429842_MCDA5510\TechnicalTestWeb2\TechnicalTestWeb2\obj\Debug\TechnicalTestWeb2.csprojAssemblyReference.cache
+C:\Users\deyukong\Documents\A00429842_MCDA5510\TechnicalTestWeb2\TechnicalTestWeb2\obj\Debug\TechnicalTestWeb2.csproj.CoreCompileInputs.cache
