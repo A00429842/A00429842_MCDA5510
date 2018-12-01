@@ -105,7 +105,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <import namespace="http://dao.mcda5510.com"/>
    <complexType name="Transaction">
     <sequence>
-     <element name="cardNumber" nillable="true" type="xsd:string"/>
      <element name="createdBy" nillable="true" type="xsd:string"/>
      <element name="createdOn" nillable="true" type="xsd:string"/>
      <element name="creditCardType" nillable="true" type="xsd:int"/>
@@ -113,6 +112,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="expDate" nillable="true" type="xsd:string"/>
      <element name="id" nillable="true" type="xsd:int"/>
      <element name="nameOnCard" nillable="true" type="xsd:string"/>
+     <element name="cardNumber" nillable="true" type="xsd:string"/>
      <element name="quantity" nillable="true" type="xsd:int"/>
      <element name="totalPrice" nillable="true" type="xsd:double"/>
      <element name="unitPrice" nillable="true" type="xsd:double"/>
