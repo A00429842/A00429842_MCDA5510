@@ -379,7 +379,11 @@ public class Transaction  implements java.io.Serializable {
     static {
         typeDesc.setXmlType(new javax.xml.namespace.QName("http://entity.mcda5510.com", "Transaction"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
-
+        elemField.setFieldName("cardNumber");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://entity.mcda5510.com", "cardNumber"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(true);
+        typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("createdBy");
         elemField.setXmlName(new javax.xml.namespace.QName("http://entity.mcda5510.com", "createdBy"));
@@ -424,13 +428,6 @@ public class Transaction  implements java.io.Serializable {
         elemField.setXmlName(new javax.xml.namespace.QName("http://entity.mcda5510.com", "nameOnCard"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(true);
-        
-        elemField.setFieldName("cardNumber");
-	      elemField.setXmlName(new javax.xml.namespace.QName("http://entity.mcda5510.com", "cardNumber"));
-	      elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-	      elemField.setNillable(true);
-	      typeDesc.addFieldDesc(elemField);
-        
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("quantity");
