@@ -121,7 +121,7 @@ public class Transaction {
 
 		}else if(creditCardType == 3)
 		{
-	    	regStr = "3(4|7)[0-9] {14}";
+	    	regStr = "3(4|7)[0-9]{14}";
 		}
 		boolean isCorrect = cardNumber.matches(regStr);
 		if(!isCorrect)
