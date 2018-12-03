@@ -65,7 +65,7 @@ public class Transaction {
 		return expDate;
 	}
 	public void setExpDate(String expDate) throws Exception {
-		boolean isCorrect = expDate.matches("(0[1-9]|1[0-2])/20(1[6-9]|2[0-9]|31)");
+		boolean isCorrect = expDate.matches("(0[1-9]|1[0-2])/20(1[6-9]|2[0-9]|3[0-1])");
     	if(!isCorrect)
     	{
 			Logger.getLogger("Main").log(Level.SEVERE, "exp date is not correct");
