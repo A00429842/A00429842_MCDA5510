@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service.mcda5510.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.mcda5510.com" xmlns:intf="http://service.mcda5510.com" xmlns:tns1="http://dao.mcda5510.com" xmlns:tns2="http://entity.mcda5510.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://service.mcda5510.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://dao.mcda5510.com"/>
+   <import namespace="http://entity.mcda5510.com"/>
+   <element name="main">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="args" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="mainResponse">
+    <complexType/>
+   </element>
+   <element name="test">
+    <complexType/>
+   </element>
+   <element name="testResponse">
+    <complexType/>
+   </element>
+   <element name="closeConnection">
+    <complexType/>
+   </element>
+   <element name="closeConnectionResponse">
+    <complexType/>
+   </element>
+   <element name="returnInt">
+    <complexType/>
+   </element>
+   <element name="returnIntResponse">
+    <complexType>
+     <sequence>
+      <element name="returnIntReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDao">
+    <complexType/>
+   </element>
+   <element name="getDaoResponse">
+    <complexType>
+     <sequence>
+      <element name="getDaoReturn" type="tns1:MySQLAccess"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setDao">
+    <complexType>
+     <sequence>
+      <element name="dao" type="tns1:MySQLAccess"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setDaoResponse">
+    <complexType/>
+   </element>
+   <element name="getTransaction">
+    <complexType>
+     <sequence>
+      <element name="tid" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getTransactionResponse">
+    <complexType>
+     <sequence>
+      <element name="getTransactionReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTransaction">
+    <complexType>
+     <sequence>
+      <element name="trxn" type="tns2:Transaction"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTransactionResponse">
+    <complexType>
+     <sequence>
+      <element name="createTransactionReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeTransaction">
+    <complexType>
+     <sequence>
+      <element name="tid" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeTransactionResponse">
+    <complexType>
+     <sequence>
+      <element name="removeTransactionReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateTransaction">
+    <complexType>
+     <sequence>
+      <element name="trxn" type="tns2:Transaction"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateTransactionResponse">
+    <complexType>
+     <sequence>
+      <element name="updateTransactionReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://dao.mcda5510.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://entity.mcda5510.com"/>
+   <complexType name="MySQLAccess">
+    <sequence/>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://entity.mcda5510.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://dao.mcda5510.com"/>
+   <complexType name="Transaction">
+    <sequence>
+     <element name="cardCategory" nillable="true" type="xsd:int"/>
+     <element name="cardNumber" nillable="true" type="xsd:string"/>
+     <element name="createdBy" nillable="true" type="xsd:string"/>
+     <element name="createdOn" nillable="true" type="xsd:string"/>
+     <element name="creditCardTypeName" nillable="true" type="xsd:string"/>
+     <element name="expDate" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:string"/>
+     <element name="nameOnCard" nillable="true" type="xsd:string"/>
+     <element name="quantity" nillable="true" type="xsd:int"/>
+     <element name="reservationId" nillable="true" type="xsd:int"/>
+     <element name="totalPrice" nillable="true" type="xsd:double"/>
+     <element name="unitPrice" nillable="true" type="xsd:double"/>
+     <element name="userId" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="returnIntResponse">
+
+      <wsdl:part element="impl:returnIntResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTransactionResponse">
+
+      <wsdl:part element="impl:getTransactionResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="returnIntRequest">
+
+      <wsdl:part element="impl:returnInt" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDaoResponse">
+
+      <wsdl:part element="impl:getDaoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeTransactionRequest">
+
+      <wsdl:part element="impl:removeTransaction" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="testRequest">
+
+      <wsdl:part element="impl:test" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateTransactionResponse">
+
+      <wsdl:part element="impl:updateTransactionResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTransactionRequest">
+
+      <wsdl:part element="impl:getTransaction" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setDaoRequest">
+
+      <wsdl:part element="impl:setDao" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setDaoResponse">
+
+      <wsdl:part element="impl:setDaoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createTransactionResponse">
+
+      <wsdl:part element="impl:createTransactionResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateTransactionRequest">
+
+      <wsdl:part element="impl:updateTransaction" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="closeConnectionRequest">
+
+      <wsdl:part element="impl:closeConnection" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="closeConnectionResponse">
+
+      <wsdl:part element="impl:closeConnectionResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="mainResponse">
+
+      <wsdl:part element="impl:mainResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createTransactionRequest">
+
+      <wsdl:part element="impl:createTransaction" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="mainRequest">
+
+      <wsdl:part element="impl:main" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="testResponse">
+
+      <wsdl:part element="impl:testResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDaoRequest">
+
+      <wsdl:part element="impl:getDao" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeTransactionResponse">
+
+      <wsdl:part element="impl:removeTransactionResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="TrxnWebService">
+
+      <wsdl:operation name="main">
+
+         <wsdl:input message="impl:mainRequest" name="mainRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:mainResponse" name="mainResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="test">
+
+         <wsdl:input message="impl:testRequest" name="testRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:testResponse" name="testResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="closeConnection">
+
+         <wsdl:input message="impl:closeConnectionRequest" name="closeConnectionRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:closeConnectionResponse" name="closeConnectionResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="returnInt">
+
+         <wsdl:input message="impl:returnIntRequest" name="returnIntRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:returnIntResponse" name="returnIntResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDao">
+
+         <wsdl:input message="impl:getDaoRequest" name="getDaoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDaoResponse" name="getDaoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setDao">
+
+         <wsdl:input message="impl:setDaoRequest" name="setDaoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setDaoResponse" name="setDaoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTransaction">
+
+         <wsdl:input message="impl:getTransactionRequest" name="getTransactionRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getTransactionResponse" name="getTransactionResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTransaction">
+
+         <wsdl:input message="impl:createTransactionRequest" name="createTransactionRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createTransactionResponse" name="createTransactionResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeTransaction">
+
+         <wsdl:input message="impl:removeTransactionRequest" name="removeTransactionRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeTransactionResponse" name="removeTransactionResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateTransaction">
+
+         <wsdl:input message="impl:updateTransactionRequest" name="updateTransactionRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:updateTransactionResponse" name="updateTransactionResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="TrxnWebServiceSoapBinding" type="impl:TrxnWebService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="main">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="mainRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="mainResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="test">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="testRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="closeConnection">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="closeConnectionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="closeConnectionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="returnInt">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="returnIntRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="returnIntResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDao">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDaoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDaoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setDao">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setDaoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setDaoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTransaction">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getTransactionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getTransactionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTransaction">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createTransactionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createTransactionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeTransaction">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeTransactionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeTransactionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateTransaction">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateTransactionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateTransactionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="TrxnWebServiceService">
+
+      <wsdl:port binding="impl:TrxnWebServiceSoapBinding" name="TrxnWebService">
+
+         <wsdlsoap:address location="http://localhost:8080/HotelTrxnService/services/TrxnWebService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
